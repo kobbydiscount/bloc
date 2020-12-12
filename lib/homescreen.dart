@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:learning_bloc/models/counter_model.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -30,18 +32,24 @@ class HomeScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       print("Increase");
+                      Provider.of<CounterModel>(context, listen: false)
+                          .increment();
                     },
                     child: Icon(Icons.add_circle,
                         color: Color(0XFF03C4E5), size: 30),
                   ),
                 ),
-                Text(
-                  "State",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Consumer<CounterModel>(
+                  builder: (context, counterInstance, child) {
+                    return Text(
+                      counterInstance.count.toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
                 ),
                 Container(
                   height: 60,
@@ -53,6 +61,8 @@ class HomeScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       print("Decrease");
+                      Provider.of<CounterModel>(context, listen: false)
+                          .decrement();
                     },
                     child: Icon(
                       Icons.remove_circle,
@@ -62,7 +72,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Provider.of<CounterModel>(context, listen: false).reset();
+                  },
                   child: Container(
                     child: Icon(Icons.refresh, size: 30, color: Colors.yellow),
                   ),
