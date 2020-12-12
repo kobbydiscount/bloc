@@ -9,8 +9,10 @@ class CounterModel extends ChangeNotifier {
   }
 
   void decrement() {
-    this.count--;
-    notifyListeners();
+    if (this.count > 0) {
+      this.count--;
+      notifyListeners();
+    }
   }
 
   void reset() {
