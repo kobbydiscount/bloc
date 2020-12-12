@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning_bloc/cubit/counter_cubit.dart';
-import 'package:learning_bloc/models/counter_model.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -33,23 +30,18 @@ class HomeScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       print("Increase");
-                      BlocProvider.of<CounterCubit>(context).increment();
                     },
                     child: Icon(Icons.add_circle,
                         color: Color(0XFF03C4E5), size: 30),
                   ),
                 ),
-                BlocBuilder<CounterCubit, CounterModel>(
-                  builder: (BuildContext context, CounterModel counterState) {
-                    return Text(
-                      counterState.counter.toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    );
-                  },
+                Text(
+                  "State",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Container(
                   height: 60,
@@ -61,10 +53,6 @@ class HomeScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       print("Decrease");
-                      if (BlocProvider.of<CounterCubit>(context).state.counter >
-                          0) {
-                        BlocProvider.of<CounterCubit>(context).decrement();
-                      }
                     },
                     child: Icon(
                       Icons.remove_circle,
@@ -74,9 +62,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<CounterCubit>(context).reset();
-                  },
+                  onTap: () {},
                   child: Container(
                     child: Icon(Icons.refresh, size: 30, color: Colors.yellow),
                   ),
