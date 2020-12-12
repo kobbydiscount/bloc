@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0XFF03C4E5),
-        title: Text("Counter App"),
+        title: Text("Counter App in Provider"),
         centerTitle: true,
       ),
       body: Padding(
