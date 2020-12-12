@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning_bloc/cubit/counter_cubit.dart';
 import 'package:learning_bloc/models/counter_model.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -9,7 +8,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0XFF03C4E5),
-        title: Text("Counter App"),
+        title: Text("Counter App in Provider"),
         centerTitle: true,
       ),
       body: Padding(
@@ -33,16 +32,17 @@ class HomeScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       print("Increase");
-                      BlocProvider.of<CounterCubit>(context).increment();
+                      Provider.of<CounterModel>(context, listen: false)
+                          .increment();
                     },
                     child: Icon(Icons.add_circle,
                         color: Color(0XFF03C4E5), size: 30),
                   ),
                 ),
-                BlocBuilder<CounterCubit, CounterModel>(
-                  builder: (BuildContext context, CounterModel counterState) {
+                Consumer<CounterModel>(
+                  builder: (context, counterInstance, child) {
                     return Text(
-                      counterState.counter.toString(),
+                      counterInstance.count.toString(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 40,
@@ -61,7 +61,8 @@ class HomeScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       print("Decrease");
-                      BlocProvider.of<CounterCubit>(context).decrement();
+                      Provider.of<CounterModel>(context, listen: false)
+                          .decrement();
                     },
                     child: Icon(
                       Icons.remove_circle,
@@ -72,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    BlocProvider.of<CounterCubit>(context).reset();
+                    Provider.of<CounterModel>(context, listen: false).reset();
                   },
                   child: Container(
                     child: Icon(Icons.refresh, size: 30, color: Colors.yellow),
