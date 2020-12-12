@@ -1,14 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:learning_bloc/models/counter_model.dart';
 
-part 'counter_state.dart';
+class CounterCubit extends Cubit<CounterModel> {
+  CounterCubit() : super(CounterModel(counter: 0));
 
-class CounterCubit extends Cubit<CounterState> {
-  CounterCubit() : super(CounterState(counter: 0));
+  void increment() => emit(CounterModel(counter: state.counter + 1));
 
-  void increment() => emit(CounterState(counter: state.counter + 1));
+  void decrement() {
+    if (state.counter > 0) {
+      emit(CounterModel(counter: state.counter - 1));
+    }
+  }
 
-  void decrement() => emit(CounterState(counter: state.counter - 1));
-
-  void reset() => emit(CounterState(counter: 0));
+  void reset() => emit(CounterModel(counter: 0));
 }
