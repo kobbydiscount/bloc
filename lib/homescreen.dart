@@ -61,10 +61,7 @@ class HomeScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       print("Decrease");
-                      if (BlocProvider.of<CounterCubit>(context).state.counter >
-                          0) {
-                        BlocProvider.of<CounterCubit>(context).decrement();
-                      }
+                      BlocProvider.of<CounterCubit>(context).decrement();
                     },
                     child: Icon(
                       Icons.remove_circle,

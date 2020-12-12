@@ -6,7 +6,11 @@ class CounterCubit extends Cubit<CounterModel> {
 
   void increment() => emit(CounterModel(counter: state.counter + 1));
 
-  void decrement() => emit(CounterModel(counter: state.counter - 1));
+  void decrement() {
+    if (state.counter > 0) {
+      emit(CounterModel(counter: state.counter - 1));
+    }
+  }
 
   void reset() => emit(CounterModel(counter: 0));
 }
